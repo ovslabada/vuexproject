@@ -1,0 +1,122 @@
+.filter
+    position: absolute
+    background: #FFFFFF
+    width: calc( 100% - ( #{$gap} * 2) )
+    box-shadow: 6px 4px 35px rgba(0, 0, 0, 0.21)
+    padding: 16px 16px 0 13px
+    margin-top: -16px
+    z-index: 2
+    /** display: block **/
+    display: none
+
+    &__heading
+        display: flex
+        margin-bottom: 16px
+
+    &__h3
+        margin-right: 10px
+        font-weight: 600
+        font-size: 14px
+        line-height: 17px
+        color: $color_select
+        text-transform: uppercase
+        padding-top: 1px
+
+    &__path
+        fill: $color_select
+
+    &__category
+        width: 100%
+        margin-bottom: 18px
+
+        &[open] .filter__name
+            color: $color_select
+            
+
+    &__summary
+        list-style: none
+        cursor: pointer
+        position: relative
+
+    &__name
+        font-size: 14px
+        line-height: 17px
+        font-weight: 400
+        color: $color_text-dark
+        text-transform: uppercase
+        border-left: 5px solid $color_select
+        border-bottom: 1px solid $color_text
+        padding: 10px
+
+    &__ol
+        list-style-type: none
+        margin: 24px 15px
+        display: flex
+        flex-direction: column
+        gap: 12px
+
+    &__a
+        font-weight: 400
+        font-size: 14px
+        line-height: 17px
+        color: $color_text-dark
+
+        &:hover
+            color: $color_select
+
+.pages
+    margin-top: 48px
+
+    &__container
+        margin: 12px
+        display: flex
+        justify-self: center
+        width: fit-content
+        margin: auto
+        gap: 10px
+        border: 1px solid $color_text
+        border-radius: 5px
+        padding: 16px
+
+    &__turn
+        font-size: 25px
+        line-height: 15px
+        color: #000
+        display: flex
+
+        &:hover
+            color: $color_select
+
+    &__ol
+        list-style-type: none
+        font-size: 16px
+        line-height: 19px
+        display: flex
+
+
+    &__li
+        font-weight: 300
+        font-size: 16px
+        line-height: 19px
+        display: flex
+        color: $color_text
+        margin-right: 10px
+
+        &:nth-last-child(1)::before 
+            content: "..... "
+
+        &:nth-child(5)
+            margin-right: 1px
+
+        &:last-child
+            margin-right: 0
+
+    &__a
+        color: $color_text
+
+        &:hover
+            color: $color_select
+
+    
+    &__disolay-none
+        display: none
