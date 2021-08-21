@@ -12,6 +12,7 @@
 
                     <div class="button-a__container">
             <div class="button-a">Browse All Product</div>
+                    </div>
         </div>
     </section>    
 </template>
@@ -23,6 +24,11 @@ export default {
     name: 'Items',
     components: {
         Product
+    },
+    computed: {
+        catalog() {
+            return this.$store.getters.getCatalog
+        }
     }
 }
 

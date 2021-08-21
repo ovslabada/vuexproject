@@ -9,7 +9,7 @@ app.use(express.static('./dist'));
 
 const jsonParser = bodyParser.json() 
 
-app.get('/api/good', (req, res) => { 
+app.get('api/good', (req, res) => { 
   fs.readFile('./server/data/catalog.json', 'utf8', (err, data) => { 
     res.send(data);
   })
