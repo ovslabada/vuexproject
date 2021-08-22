@@ -26,19 +26,26 @@ export default {
         Showall
     },
     computed: {
+        search() {
+            return this.$store.getters.getSearch ? new RegExp(this.$store.getters.getSearch, 'gi') : false
+        },
         catalog() {
-            if (this.toshow) {
+            if (this.tosearch) {
+               return this.$store.getters.getCatalog.filter((good) => this.search.test(good.product_title))
+            } else if (this.toshow) {
                 return this.$store.getters.getCatalog
             }
             return this.$store.getters.getCatalog.filter((good) => good.on_main)
         },
         toshow() {
             return this.$store.getters.getShow
+        },
+        tosearch() {
+            return this.$store.getters.getSearchis
         }
     },
     methods: {
         showAll() {
-            /* catalogall = [...catalogall, ...catalogOther] */
             this.$store.commit('setShow')
         }
     }

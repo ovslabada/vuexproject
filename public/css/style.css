@@ -239,6 +239,7 @@ a {
 }
 .items__cart-link:hover {
   border: 2px solid #F16D7F;
+  cursor: pointer;
 }
 .items__add-to-cart {
   font-size: 14px;
@@ -266,6 +267,7 @@ a {
 .button-a:hover {
   background-color: #F16D7F;
   color: #FFFFFF;
+  cursor: pointer;
 }
 
 .advantages {
@@ -397,6 +399,13 @@ a {
 .subscribe__submit:hover {
   cursor: pointer;
 }
+.subscribe__submit_div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 16px;
+  padding-bottom: 2px;
+}
 
 .footer {
   background-color: #222222;
@@ -452,6 +461,7 @@ a {
 }
 .nav__svg:hover {
   transform: rotate(180deg);
+  cursor: pointer;
 }
 .nav__heading {
   font-size: 14px;
