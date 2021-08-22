@@ -7,10 +7,11 @@
             <p class="items__p">
                 Shop for items based on what we featured in this week
             </p>
+            <div class="items__container">
+                <Product v-bind:key="good.product_id" v-bind:good="good" v-for="good of catalog"/>
+            </div>
 
-            <Product v-bind:key="good.product_id" v-bind:good="good" v-for="good of catalog"/>
-
-                    <div class="button-a__container">
+                    <div v-on:click="showAll" class="button-a__container">
             <div class="button-a">Browse All Product</div>
                     </div>
         </div>
@@ -27,7 +28,12 @@ export default {
     },
     computed: {
         catalog() {
-            return this.$store.getters.getCatalog
+            return this.$store.getters.getCatalog.filter((good) => good.on_main)
+        }
+    },
+    methods: {
+        showAll() {
+            
         }
     }
 }

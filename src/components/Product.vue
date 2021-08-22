@@ -38,8 +38,8 @@
 
 <script>
 export default {
-  name: "Card",
-  props: ["good"],
+  name: 'Card',
+  props: ['good'],
   methods: {
     /*         addToCart() {
             this.$store.dispatch('loadToCart', this.good)
