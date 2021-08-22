@@ -10,30 +10,36 @@
             <div class="items__container">
                 <Product v-bind:key="good.product_id" v-bind:good="good" v-for="good of catalog"/>
             </div>
-
-                    <div v-on:click="showAll" class="button-a__container">
-            <div class="button-a">Browse All Product</div>
-                    </div>
+                <Showall v-on:click="showAll"/>
         </div>
     </section>    
 </template>
 
 <script>
 import Product from './Product.vue'
+import Showall from './Showall.vue'
 
 export default {
     name: 'Items',
     components: {
-        Product
+        Product,
+        Showall
     },
     computed: {
         catalog() {
+            if (this.toshow) {
+                return this.$store.getters.getCatalog
+            }
             return this.$store.getters.getCatalog.filter((good) => good.on_main)
+        },
+        toshow() {
+            return this.$store.getters.getShow
         }
     },
     methods: {
         showAll() {
-            
+            /* catalogall = [...catalogall, ...catalogOther] */
+            this.$store.commit('setShow')
         }
     }
 }
