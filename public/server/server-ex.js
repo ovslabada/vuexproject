@@ -16,6 +16,12 @@ app.get('/api/good', (req, res) => {
   })
 })
 
+app.get('/api/goodc', (req, res) => {
+  fs.readFile('./server/data/cart.json', 'utf8', (err, data) => { 
+    res.send(data);
+  });
+}) 
+
 app.put('/catalog', jsonParser , (req, res) => {
   fs.readFile('./server/data/catalog.json', 'utf8', (err, data) => {
     catalog = JSON.parse(data);
@@ -27,22 +33,31 @@ app.put('/catalog', jsonParser , (req, res) => {
   });
 })
 
-app.put('/cart', jsonParser , (req, res) => {
+
+
+/* app.put('/api/cart', jsonParser , (req, res) => {
   fs.readFile('./server/data/cart.json', 'utf8', (err, data) => {
-    cart = JSON.parse(data);
-    const newcart = req.body;
-    fs.writeFile('./server/data/cart.json', JSON.stringify(newcart, null, '\t'),
+    const cart = JSON.parse(data);
+    const item = req.body
+    cart.push(item);
+    fs.writeFile('./server/data/cart.json', JSON.stringify(cart, null, '\t'),
+    () => {
+      res.end();
+    })
+  });
+}) */
+
+app.post('/api/cart', jsonParser , (req, res) => {
+  fs.readFile('./server/data/cart.json', 'utf8', (err, data) => {
+    const cart = JSON.parse(data);
+    const item = req.body
+    cart.push(item);
+    fs.writeFile('./server/data/cart.json', JSON.stringify(cart, null, '\t'),
     () => {
       res.end();
     })
   });
 })
-
-app.get('/cart', (req, res) => {
-  fs.readFile('./server/data/cart.json', 'utf8', (err, data) => { 
-    res.send(data);
-  });
-}) 
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)

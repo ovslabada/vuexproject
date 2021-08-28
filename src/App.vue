@@ -18,6 +18,7 @@ export default {
   },
   mounted() {
     this.$store.dispatch('loadCatalog');
+    this.$store.dispatch('loadCart');
   }
 }
 </script>

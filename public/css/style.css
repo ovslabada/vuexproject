@@ -1003,6 +1003,11 @@ a {
   margin-bottom: 128px;
   flex-wrap: wrap;
 }
+.cart__products-cont {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
 .cart__products {
   display: flex;
   flex-direction: column;

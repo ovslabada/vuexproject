@@ -13,6 +13,9 @@ export default createStore({
     getCatalog(state) {
       return state.catalog
     },
+    getCart(state) {
+      return state.cart
+    },
     getShow(state) {
       return state.show
     },
@@ -28,6 +31,7 @@ export default createStore({
   }, 
   mutations: {
     setCatalog(state, payload) { state.catalog = [...state.catalog, ...payload] },
+    setCart(state, payload) { state.cart = [...state.cart, ...payload] },
     setShow(state) {
       state.show = !(state.show)
     },
@@ -39,6 +43,10 @@ export default createStore({
     },
     setSearchIs(state) {
       state.searchistrue = !(state.searchistrue)
+    },
+    addToCart(state, goodId) {
+      const good = state.catalog.find((good) => good.product_id === goodId);
+      state.cart.push({...good})
     }
     },
   actions: {
@@ -51,5 +59,20 @@ export default createStore({
             commit('setCatalog', goodList)
           })
       },
+      loadCart({ commit }) {
+        return fetch('api/goodc')
+          .then((response) => {
+            return response.json()
+          })
+          .then((goodListC) => {
+            commit('setCart', goodListC)
+          })
+      },
+      loadToCart({commit, dispatch}, good) {
+        return fetch('api/cart', {method: 'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(good)})
+        .then((response) => {
+          dispatch('loadCart', {commit})
+        })
+      }
     }
   })

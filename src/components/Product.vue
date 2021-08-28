@@ -1,10 +1,10 @@
 <template>
-  <a :href="good.product_link" class="items__a">
+  <div class="items__a">
     <object>
       <div class="items__item">
         <div class="items__img-container">
           <img class="items__img" :src="good.product_images" alt="" />
-          <div class="items__cart-link" :id="good.product_id">
+          <div v-on:click="addToCart" class="items__cart-link" :id="good.product_id">
             <svg
               class="svg-select"
               width="27"
@@ -33,17 +33,25 @@
         </div>
       </div>
     </object>
-  </a>
+  </div>
 </template>
 
 <script>
 export default {
-  name: 'Card',
+  name: 'Product',
   props: ['good'],
+  computed: {
+/*     cart() {
+            return this.$store.getters.getCart
+        }, */
+  },
   methods: {
-    /*         addToCart() {
-            this.$store.dispatch('loadToCart', this.good)
-        } */
+    addToCart() {
+
+      this.$store.dispatch('loadToCart', this.good)
+
+
+    },
   },
 };
 </script>

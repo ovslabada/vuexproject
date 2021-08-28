@@ -5,7 +5,7 @@
             <div class="top-menu__conteiner">
                 <div class="top-menu__leftright">
                     <div class="top-menu__img-cont">
-                        <a href="index.html">                   <img class="top-menu__img" src="img/logo.png" alt=""></a>
+                        <router-link to="/"><img class="top-menu__img" src="img/logo.png" alt=""></router-link>
                     </div>
                     <div class="top-menu__img-cont">
                         <svg v-on:click="showSearch"  class="svg-select" width="27" height="28" viewBox="0 0 27 28" fill="none" xmlns="http://www.w3.org/2000/svg">
