@@ -73,6 +73,24 @@ export default createStore({
         .then((response) => {
           dispatch('loadCart', {commit})
         })
+      },
+      loadChangeCart({commit, dispatch}, newcart) {
+        return fetch('api/newcart', {method: 'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(newcart)})
+        .then((response) => {
+          dispatch('loadCart', {commit})
+        })
+      },
+      loadChangeCatalogAdd({commit, dispatch}, newgood) {
+        return fetch('api/addgood', {method: 'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(newgood)})
+        .then((response) => {
+          dispatch('loadCatalog', {commit})
+        })
+      },
+      loadChangeCatalogDel({commit, dispatch}, newgood) {
+        return fetch('api/delgood', {method: 'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(newgood)})
+        .then((response) => {
+          dispatch('loadCatalog', {commit})
+        })
       }
     }
   })

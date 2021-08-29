@@ -4,7 +4,11 @@
       <div class="items__item">
         <div class="items__img-container">
           <img class="items__img" :src="good.product_images" alt="" />
-          <div v-on:click="addToCart" class="items__cart-link" :id="good.product_id">
+          <div
+            v-on:click="addHandler"
+            class="items__cart-link"
+            :id="good.product_id"
+          >
             <svg
               class="svg-select"
               width="27"
@@ -38,20 +42,37 @@
 
 <script>
 export default {
-  name: 'Product',
-  props: ['good'],
+  name: "Product",
+  props: ["good"],
   computed: {
-/*     cart() {
-            return this.$store.getters.getCart
-        }, */
+    cart() {
+      return this.$store.getters.getCart;
+    },
   },
   methods: {
-    addToCart() {
 
-      this.$store.dispatch('loadToCart', this.good)
+    addHandler() {
+        let index;
+    
+        if (this.good.quantity > 0) {
+            index = this.cart.findIndex((item) => item.product_id == this.good.product_id);
+            if (index != -1) {
+                this.cart[index].in_cart++;
+                this.cart[index].quantity--;
+                this.$store.dispatch("loadChangeCart", this.cart);
+            } else {
+                let goodToCart = Object.assign({}, this.good);
+                    goodToCart.in_cart = 1;
+                    goodToCart.quantity--;
+                this.$store.dispatch("loadToCart", goodToCart);
+            }
+            this.good.in_cart++;
+            this.good.quantity--;
+            this.$store.dispatch("loadChangeCatalogAdd", this.good);
 
-
+        }
     },
+
   },
 };
 </script>

@@ -13,12 +13,12 @@
         <li class="cart__info-li">
           Quantity:
           <div class="cart__quantity">
-            <!-- {{ goodc.product_quantity }} -->
+            {{ goodc.in_cart }}
           </div>
         </li>
       </ul>
     </div>
-    <div class="cart__close">
+    <div v-on:click="dellHandler" :id="goodc.product_id" class="cart__close">
       <svg
         class="nav__svg"
         width="18"
@@ -41,8 +41,24 @@
 export default {
   name: "Productincart",
   props: ["goodc"],
+  computed: {
+    cart() {
+      return this.$store.getters.getCart;
+    },
+  },
   methods: {
-    
+    dellHandler () {
+        let index;
+        index = this.cart.findIndex((item) => item.product_id == this.goodc.product_id);
+        this.cart[index].in_cart--;
+        this.cart[index].quantity++;
+        if (this.cart[index].in_cart <= 0) {
+            this.cart.splice([index], 1);
+        }
+        this.$store.dispatch("loadChangeCart", this.cart);
+        this.goodc.quantity++;
+        this.$store.dispatch("loadChangeCatalogDel", this.goodc);
+    }
   },
 };
 </script>
