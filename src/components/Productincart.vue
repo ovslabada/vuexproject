@@ -12,8 +12,21 @@
         <li class="cart__info-li">Size: Xl</li>
         <li class="cart__info-li">
           Quantity:
+          <div class="cart__minus">
+            <svg width="16px" height="16px" viewbox="0 0 25 25">
+            <title>Minus</title>
+            <line x1="2" y1="8" x2="22" y2="8" fill="none" stroke="#575757" stroke-width="2" stroke-linecap="round" vector-effect="non-scaling-stroke" />
+            </svg>
+          </div>
           <div class="cart__quantity">
             {{ goodc.in_cart }}
+          </div>
+          <div class="cart__plus">
+            <svg width="16px" height="16px" viewbox="0 0 25 25">
+                <title>Plus</title>
+                <line x1="2" y1="8" x2="22" y2="8" fill="none" stroke="#575757" stroke-width="2" stroke-linecap="round" vector-effect="non-scaling-stroke" />
+                <line y1="16" x1="9" y2="0.0" x2="9" fill="none" stroke="#575757" stroke-width="2" stroke-linecap="round" vector-effect="non-scaling-stroke" />
+            </svg>
           </div>
         </li>
       </ul>
@@ -48,6 +61,7 @@ export default {
   },
   methods: {
     dellHandler () {
+       /*  this.$store.commit('delFromCart', this.goodc); */
         let index;
         index = this.cart.findIndex((item) => item.product_id == this.goodc.product_id);
         this.cart[index].in_cart--;

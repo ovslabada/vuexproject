@@ -52,7 +52,9 @@ export default {
   methods: {
 
     addHandler() {
-        let index;
+        this.$store.commit('addToCart', this.good);
+
+/*         let index;
     
         if (this.good.quantity > 0) {
             index = this.cart.findIndex((item) => item.product_id == this.good.product_id);
@@ -70,7 +72,7 @@ export default {
             this.good.quantity--;
             this.$store.dispatch("loadChangeCatalogAdd", this.good);
 
-        }
+        }  */
     },
 
   },
