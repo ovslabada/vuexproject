@@ -53,7 +53,7 @@ export default {
 
     addHandler() {
         /* this.$store.commit('addToCart', this.good); */
-        this.$store.dispatch('loadToCart', this.good);
+        this.$store.dispatch('pushToCart', this.good);
 
 /*         let index;
     
@@ -67,7 +67,7 @@ export default {
                 let goodToCart = Object.assign({}, this.good);
                     goodToCart.in_cart = 1;
                     goodToCart.quantity--;
-                this.$store.dispatch("loadToCart", goodToCart);
+                this.$store.dispatch("pushToCart", goodToCart);
             }
             this.good.in_cart++;
             this.good.quantity--;

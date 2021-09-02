@@ -1,12 +1,12 @@
 <template>
-  <div :id="goodc.product_id" class="cart__product">
-    <img class="cart__img" :src="goodc.product_images" alt="" />
+  <div :id="goodId" class="cart__product">
+    <img class="cart__img" :src="goodById.product_images" alt="" />
     <div class="cart__content">
-      <h3 class="cart__heading">{{ goodc.product_title }}</h3>
+      <h3 class="cart__heading">{{ goodById.product_title }}</h3>
       <ul class="cart__info-ul">
         <li class="cart__info-li">
           Price:
-          <span class="cart__info-li_select">$ {{ goodc.product_price }}</span>
+          <span class="cart__info-li_select">$ {{ goodById.product_price }}</span>
         </li>
         <li class="cart__info-li">Color: Red</li>
         <li class="cart__info-li">Size: Xl</li>
@@ -31,7 +31,7 @@
         </li>
       </ul>
     </div>
-    <div v-on:click="dellHandler" :id="goodc.product_id" class="cart__close">
+    <div v-on:click="dellHandler" :id="goodById.product_id" class="cart__close">
       <svg
         class="nav__svg"
         width="18"
@@ -53,10 +53,14 @@
 <script>
 export default {
   name: "Productincart",
-  props: ["goodc"],
+  props: ["goodc", "goodId"],
   computed: {
     cart() {
       return this.$store.getters.getCart;
+    },
+    goodById() {
+      const catalog = this.$store.getters.getCatalog;
+      return catalog.find((item) => item.product_id == this.goodId);
     },
   },
   methods: {

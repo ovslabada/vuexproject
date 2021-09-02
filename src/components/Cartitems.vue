@@ -1,6 +1,6 @@
 <template>
         <div class="cart__products">
-            <Productincart v-bind:key="goodc.product_id" v-bind:goodc="goodc" v-for="goodc of cart"/>
+            <Productincart v-bind:key="goodc.product_id" v-bind:goodc="goodc" v-bind:goodId="goodc.product_id" v-for="goodc of cart"/>
         </div>
 </template>
 

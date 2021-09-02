@@ -19,16 +19,19 @@ export default createStore({
     getShow(state) {
       return state.show
     },
-    getSearch(state){
+    getSearch(state) {
       return state.search
     },
-    getSearchisshow(state){
+    getSearchisshow(state) {
       return state.searchisshow
     },
     getSearchis(state) {
       return state.searchistrue
+    },
+    goodCountInCart(state) {
+      return state.cart.reduce((acc, item) => acc + item.in_cart, 0)
     }
-  }, 
+  },
   mutations: {
     setCatalog(state, payload) { state.catalog = [...state.catalog, ...payload] },
     setCart(state, payload) { state.cart = [...state.cart, ...payload] },
@@ -45,53 +48,44 @@ export default createStore({
       state.searchistrue = !(state.searchistrue)
     },
     addToCart(state, good) {
-      good.quantity--;
       const goodincart = state.cart.find((item) => item.product_id == good.product_id);
-      if(goodincart) {
+      if (goodincart) {
         goodInCart.in_cart++
       } else {
-        state.cart.push({...good, in_cart: 1})
+        state.cart.push({ ...good, in_cart: 1 })
       }
-      let index;
-      index = state.catalog.findIndex((item) => item.product_id == good.product_id);
-      state.catalog[index].quantity--;
     }
-  },  
+  },
   actions: {
-      loadCatalog({ commit }) {
-        return fetch('api/good')
-          .then((response) => {
-            return response.json()
-          })
-          .then((goodList) => {
-            commit('setCatalog', goodList)
-          })
-      },
-      loadCart({ commit }) {
-        return fetch('api/goodc')
-          .then((response) => {
-            return response.json()
-          })
-          .then((goodListC) => {
-            commit('setCart', goodListC)
-          })
-      },
-      loadToCart ({ commit, dispatch }, good) {
-        return fetch ('api/tocart', {method: 'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(good)})
+    loadCatalog({ commit }) {
+      return fetch('api/good')
         .then((response) => {
-          dispatch('loadFromCartToCatalog', { commit }, good)
+          return response.json()
         })
+        .then((goodList) => {
+          commit('setCatalog', goodList)
+        })
+    },
+    loadCart({ commit }) {
+      return fetch('api/goodc')
         .then((response) => {
-          commit('addToCart', good)
+          return response.json()
+        })
+        .then((goodListC) => {
+          commit('setCart', goodListC)
+        })
+    },
+    pushToCart({ commit, dispatch }, good) {
+      return fetch('api/tocart', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(good) })
+        .then((response) => {
+          const answer = JSON.parse(response.body);
+
+          if (answer.status == "ok") commit('addToCart', good)
         })
         .catch(console.log("mistake is"))
-      },
-      loadFromCartToCatalog (good) {
-        return fetch ('api/tocatalog', {method: 'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(good)})
-        .then((response) => {
-          console.log(good)
-        })
-        .catch(console.log("mistake was"))  
-      }
     },
-  })
+    popToCart({ commit, dispatch }, good) {
+      // TODO -1 good from cart
+    }
+  },
+})
