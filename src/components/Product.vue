@@ -52,7 +52,8 @@ export default {
   methods: {
 
     addHandler() {
-        this.$store.commit('addToCart', this.good);
+        /* this.$store.commit('addToCart', this.good); */
+        this.$store.dispatch('loadToCart', this.good);
 
 /*         let index;
     

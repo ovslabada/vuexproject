@@ -45,39 +45,18 @@ export default createStore({
       state.searchistrue = !(state.searchistrue)
     },
     addToCart(state, good) {
-      let index;
-    
-      if (good.quantity > 0) {
-          index = state.cart.findIndex((item) => item.product_id == good.product_id);
-          if (index != -1) {
-              state.cart[index].in_cart++;
-              state.cart[index].quantity--;
-              dispatch('loadChangeCart');
-          } else {
-              let goodToCart = Object.assign({}, good);
-                  goodToCart.in_cart = 1;
-                  goodToCart.quantity--;
-              dispatch('loadToCart', goodToCart);
-          }
-          good.in_cart++;
-          good.quantity--;
-          dispatch('loadChangeCatalogAdd', good);
-
+      good.quantity--;
+      const goodincart = state.cart.find((item) => item.product_id == good.product_id);
+      if(goodincart) {
+        goodInCart.in_cart++
+      } else {
+        state.cart.push({...good, in_cart: 1})
       }
-    },
-    delFromCart(state, good) {
-/*         let index;
-        index = state.cart.findIndex((item) => item.product_id == good.product_id);
-        state.cart[index].in_cart--;
-        state.cart[index].quantity++;
-        if (state.cart[index].in_cart <= 0) {
-          state.cart.splice([index], 1);
-        }
-        dispatch('loadChangeCart');
-        good.quantity++;
-        dispatch('loadChangeCatalogDel', {commit}); */
+      let index;
+      index = state.catalog.findIndex((item) => item.product_id == good.product_id);
+      state.catalog[index].quantity--;
     }
-    },
+  },  
   actions: {
       loadCatalog({ commit }) {
         return fetch('api/good')
@@ -97,57 +76,22 @@ export default createStore({
             commit('setCart', goodListC)
           })
       },
-/*       loadToCart({commit, dispatch}, good) {
-        return fetch('api/cart', {method: 'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(good)})
+      loadToCart ({ commit, dispatch }, good) {
+        return fetch ('api/tocart', {method: 'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(good)})
         .then((response) => {
-          dispatch('loadCart', {commit})
+          dispatch('loadFromCartToCatalog', { commit }, good)
         })
-      }, */
-
-     loadToCart({commit, dispatch}, good) {
-        return fetch('api/cart', {method: 'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(good)})
         .then((response) => {
-          dispatch('loadCart', {commit})
+          commit('addToCart', good)
         })
-     },
-    
-      loadChangeCart({commit, dispatch}) {
-        return fetch('api/newcart', {method: 'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(state.cart)})
-        .then((response) => {
-          dispatch('loadCart', {commit})
-        })
+        .catch(console.log("mistake is"))
       },
-/*       loadChangeCart({commit, dispatch}, newcart) {
-        return fetch('api/newcart', {method: 'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(newcart)})
+      loadFromCartToCatalog (good) {
+        return fetch ('api/tocatalog', {method: 'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(good)})
         .then((response) => {
-          dispatch('loadCart', {commit}) */
-
-/*       loadChangeCatalogAdd({commit, dispatch}, newgood) {
-        return fetch('api/addgood', {method: 'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(newgood)})
-        .then((response) => {
-          dispatch('loadCatalog', {commit})
+          console.log(good)
         })
-      }, */
-
-     loadChangeCatalogAdd ({commit, dispatch}, newgood) {
-          return fetch('api/addgood', {method: 'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(newgood)})
-          .then((response) => {
-            dispatch('loadCatalog', {commit})
-          }) 
-          }, 
-      
-      loadChangeCatalogDel({commit, dispatch}, newgood) {
-        return fetch('api/delgood', {method: 'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(newgood)})
-        .then((response) => {
-          dispatch('loadCatalog', {commit})
-        })
-
-/*         ({commit, dispatch}, newgood) {
-          return fetch('api/delgood', {method: 'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(newgood)})
-          .then((response) => {
-            dispatch('loadCatalog', {commit})
-          })
-        }   */
+        .catch(console.log("mistake was"))  
       }
-    }
+    },
   })

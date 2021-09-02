@@ -62,16 +62,7 @@ export default {
   methods: {
     dellHandler () {
        /*  this.$store.commit('delFromCart', this.goodc); */
-        let index;
-        index = this.cart.findIndex((item) => item.product_id == this.goodc.product_id);
-        this.cart[index].in_cart--;
-        this.cart[index].quantity++;
-        if (this.cart[index].in_cart <= 0) {
-            this.cart.splice([index], 1);
-        }
-        this.$store.dispatch("loadChangeCart", this.cart);
-        this.goodc.quantity++;
-        this.$store.dispatch("loadChangeCatalogDel", this.goodc);
+
     }
   },
 };
