@@ -44,7 +44,7 @@ app.get('/api/goodc', (req, res) => {
   })
 })  */
 
-app.put('/api/tocart', (req, res) => {
+app.put('/api/tocart', jsonParser, (req, res) => {
   fs.readFile('./server/data/cart.json', 'utf8', (err, data) => { 
     const cart = JSON.parse(data);
     const newgoodincart = req.body;
@@ -64,14 +64,13 @@ app.put('/api/tocart', (req, res) => {
   })
 }) 
 
-app.put('/api/tocatalog', (req, res) => {
+app.put('/api/tocatalog', jsonParser, (req, res) => {
   fs.readFile('./server/data/catalog.json', 'utf8', (err, data) => { 
     const catalog = JSON.parse(data);
     const updategood = req.body;
-    let findex;
-    findex = catalog.findIndex((item) => item.product_id == updategood.product_id);
-    catalog[index].quantity--;
-    fs.writeFile('./server/data/cart.catalog', JSON.stringify(cart, null, '\t'),
+    const goodincatalog = catalog.find((good) => good.product_id == updategood.product_id);
+    goodincatalog.quantity--;
+    fs.writeFile('./server/data/catalog.json', JSON.stringify(cart, null, '\t'),
     () => {
       res.end();
     })  
