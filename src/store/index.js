@@ -64,7 +64,7 @@ export default createStore({
         state.cart.splice([index], 1);
       }
     },
-    minusFromCart (state, good) {
+    deleteFromCart (state, good) {
       let index;
       index = state.cart.findIndex((item) => item.product_id == good.product_id);
       state.cart.splice([index], 1);
@@ -93,7 +93,9 @@ export default createStore({
       return fetch('api/tocart', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(good) })
       .then((response) => response.json())
       .then((data) => {
-        if (data.status == "ok") commit('addToCart', good)
+        if (data.status == "ok") {
+          commit('addToCart', good)
+        }
       })
         .catch(console.log("mistake is"))
     },
@@ -112,7 +114,7 @@ export default createStore({
       .then((response) => response.json())
       .then((data) => {
         if (data.status == "ok") {
-          commit('minusFromCart', good)
+          commit('deleteFromCart', good)
         }
       })
       .catch(console.log("error to delite"))
