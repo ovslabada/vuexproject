@@ -52,28 +52,7 @@ export default {
   methods: {
 
     addHandler() {
-        /* this.$store.commit('addToCart', this.good); */
         this.$store.dispatch('pushToCart', this.good);
-
-/*         let index;
-    
-        if (this.good.quantity > 0) {
-            index = this.cart.findIndex((item) => item.product_id == this.good.product_id);
-            if (index != -1) {
-                this.cart[index].in_cart++;
-                this.cart[index].quantity--;
-                this.$store.dispatch("loadChangeCart", this.cart);
-            } else {
-                let goodToCart = Object.assign({}, this.good);
-                    goodToCart.in_cart = 1;
-                    goodToCart.quantity--;
-                this.$store.dispatch("pushToCart", goodToCart);
-            }
-            this.good.in_cart++;
-            this.good.quantity--;
-            this.$store.dispatch("loadChangeCatalogAdd", this.good);
-
-        }  */
     },
 
   },

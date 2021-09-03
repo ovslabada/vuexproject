@@ -12,7 +12,7 @@
         <li class="cart__info-li">Size: Xl</li>
         <li class="cart__info-li">
           Quantity:
-          <div class="cart__minus">
+          <div  v-on:click="minusHandler" :id="goodById.product_id" class="cart__minus">
             <svg width="16px" height="16px" viewbox="0 0 25 25">
             <title>Minus</title>
             <line x1="2" y1="8" x2="22" y2="8" fill="none" stroke="#575757" stroke-width="2" stroke-linecap="round" vector-effect="non-scaling-stroke" />
@@ -21,7 +21,7 @@
           <div class="cart__quantity">
             {{ goodc.in_cart }}
           </div>
-          <div class="cart__plus">
+          <div v-on:click="addHandler" :id="goodById.product_id" class="cart__plus">
             <svg width="16px" height="16px" viewbox="0 0 25 25">
                 <title>Plus</title>
                 <line x1="2" y1="8" x2="22" y2="8" fill="none" stroke="#575757" stroke-width="2" stroke-linecap="round" vector-effect="non-scaling-stroke" />
@@ -31,7 +31,7 @@
         </li>
       </ul>
     </div>
-    <div v-on:click="dellHandler" :id="goodById.product_id" class="cart__close">
+    <div v-on:click="delHandler" :id="goodById.product_id" class="cart__close">
       <svg
         class="nav__svg"
         width="18"
@@ -58,16 +58,23 @@ export default {
     cart() {
       return this.$store.getters.getCart;
     },
+    catalog() {
+      return this.$store.getters.getCatalog;
+    },
     goodById() {
-      const catalog = this.$store.getters.getCatalog;
-      return catalog.find((item) => item.product_id == this.goodId);
+      return this.catalog.find((item) => item.product_id == this.goodId);
     },
   },
   methods: {
-    dellHandler () {
-       /*  this.$store.commit('delFromCart', this.goodc); */
-
-    }
+    minusHandler () {
+       this.$store.dispatch('popToCart', this.goodById);
+    },
+    delHandler () {
+      this.$store.dispatch('delFromCart', this.goodById);
+    },
+    addHandler() {
+        this.$store.dispatch('pushToCart', this.goodById);
+    },
   },
 };
 </script>

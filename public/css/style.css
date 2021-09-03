@@ -1029,12 +1029,12 @@ a {
 }
 .cart__products {
   display: flex;
+  width: 672px;
   flex-direction: column;
   gap: 40px;
 }
 .cart__product {
   display: flex;
-  width: 652px;
   box-sizing: border-box;
   box-shadow: 17px 19px 24px rgba(0, 0, 0, 0.13);
   transition: transform 0.5s;
@@ -1090,9 +1090,15 @@ a {
   display: inline-block;
   margin-left: 24px;
 }
+.cart__minus:hover {
+  cursor: pointer;
+}
 .cart__plus {
   display: inline-block;
   margin-left: 16px;
+}
+.cart__plus:hover {
+  cursor: pointer;
 }
 .cart__acts {
   display: flex;

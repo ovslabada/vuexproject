@@ -54,6 +54,20 @@ export default createStore({
       } else {
         state.cart.push({ ...good, in_cart: 1 })
       }
+    },
+    minusFromCart (state, good) {
+      let index;
+      index = state.cart.findIndex((item) => item.product_id == good.product_id);
+      if (state.cart[index].in_cart > 1) {
+        state.cart[index].in_cart--
+      } else {
+        state.cart.splice([index], 1);
+      }
+    },
+    minusFromCart (state, good) {
+      let index;
+      index = state.cart.findIndex((item) => item.product_id == good.product_id);
+      state.cart.splice([index], 1);
     }
   },
   actions: {
@@ -75,17 +89,35 @@ export default createStore({
           commit('setCart', goodListC)
         })
     },
-    pushToCart({ commit, dispatch }, good) {
+    pushToCart({ commit }, good) {
       return fetch('api/tocart', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(good) })
-        .then((response) => {
-          const answer = JSON.parse(response.body);
-
-          if (answer.status == "ok") commit('addToCart', good)
-        })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status == "ok") {
+          commit('addToCart', good)
+        }
+      })
         .catch(console.log("mistake is"))
     },
-    popToCart({ commit, dispatch }, good) {
-      // TODO -1 good from cart
+    popToCart({ commit }, good) {
+      return fetch('api/poptocart', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(good) })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status == "ok") {
+          commit('minusFromCart', good)
+        }
+      })
+        .catch(console.log("mistake is"))
+    },
+    delFromCart({ commit }, good) {
+      return fetch('api/delfromcart', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(good) })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status == "ok") {
+          commit('minusFromCart', good)
+        }
+      })
+      .catch(console.log("error to delite"))
     }
   },
 })
