@@ -93,9 +93,7 @@ export default createStore({
       return fetch('api/tocart', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(good) })
       .then((response) => response.json())
       .then((data) => {
-        if (data.status == "ok") {
-          commit('addToCart', good)
-        }
+        if (data.status == "ok") commit('addToCart', good)
       })
         .catch(console.log("mistake is"))
     },
