@@ -10,7 +10,7 @@
             <div class="items__container">
                 <Product v-bind:key="good.product_id" v-bind:good="good" v-for="good of catalog"/>
             </div>
-                <Showall v-on:click="showAll"/>
+                <Showall v-if="(!tosearch)" v-on:click="showAll"/>
         </div>
     </section>    
 </template>
@@ -34,8 +34,10 @@ export default {
                return this.$store.getters.getCatalog.filter((good) => this.search.test(good.product_title))
             } else if (this.toshow) {
                 return this.$store.getters.getCatalog
+            } else {
+                return this.$store.getters.getCatalog.filter((good) => good.on_main)
             }
-            return this.$store.getters.getCatalog.filter((good) => good.on_main)
+            
         },
         toshow() {
             return this.$store.getters.getShow
