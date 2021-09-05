@@ -1,6 +1,5 @@
 .nav
-    display: flex
-    /** display: none **/
+    display: none
     flex-direction: column
     gap: 24px
     position: absolute
@@ -12,6 +11,12 @@
     padding: 16px 16px 32px 32px
     box-sizing: border-box
     box-shadow: 10px 0px 24px 10px rgba(0, 0, 0, 0.13)
+
+    &__active
+        display: flex
+
+    &__notactive
+        display: none
 
     &__svg-conteiner
         display: flex
