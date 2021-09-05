@@ -60,35 +60,32 @@ export default createStore({
       state.searchisshow = !(state.searchisshow)
     },
     addToCart(state, good) {
-      const goodincart = state.cart.find((item) => item.product_id == good.product_id);
-      if (goodincart) {
-        goodInCart.in_cart++
-      } else {
+      let index = state.cart.findIndex((item) => item.product_id == good.product_id);
+      if (index == -1) {
         state.cart.push({ ...good, in_cart: 1 })
+      } else {
+        state.cart[index].in_cart++
       }
     },
-    minusFromCart (state, good) {
-      let index;
-      index = state.cart.findIndex((item) => item.product_id == good.product_id);
+    minusFromCart(state, good) {
+      let index = state.cart.findIndex((item) => item.product_id == good.product_id);
       if (state.cart[index].in_cart > 1) {
         state.cart[index].in_cart--
       } else {
         state.cart.splice([index], 1);
       }
     },
-    deleteFromCart (state, good) {
-      let index;
-      index = state.cart.findIndex((item) => item.product_id == good.product_id);
+    deleteFromCart(state, good) {
+      let index = state.cart.findIndex((item) => item.product_id == good.product_id);
       state.cart.splice([index], 1);
     },
-    rescart (state) {
-      let index;
-      state.cart.forEach(product => {
-      index = cart.findIndex((item) => item.product_id == product.product_id);
-      const quantity = cart[index].in_cart;
-      const goodInCatalog = state.catalog.find((good) => good.product_id == product.product_id);
-      goodInCatalog.quantity += quantity;
+    rescart(state) {
+
+      state.cart.forEach(cartItem => {
+        const goodInCatalog = state.catalog.find((good) => good.product_id == cartItem.product_id);
+        if (goodInCatalog) goodInCatalog.quantity += cartItem.in_cart;
       });
+    
       state.cart = [];
     },
     setAdressTrue(state) {
@@ -119,53 +116,53 @@ export default createStore({
     },
     pushToCart({ commit }, good) {
       return fetch('api/tocart', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(good) })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.status == "ok") {
-          commit('addToCart', good)
-        }
-      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.status == "ok") {
+            commit('addToCart', good)
+          }
+        })
         .catch(console.log("mistake is"))
     },
     popToCart({ commit }, good) {
       return fetch('api/poptocart', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(good) })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.status == "ok") {
-          commit('minusFromCart', good)
-        }
-      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.status == "ok") {
+            commit('minusFromCart', good)
+          }
+        })
         .catch(console.log("mistake is"))
     },
     delFromCart({ commit }, good) {
       return fetch('api/delfromcart', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(good) })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.status == "ok") {
-          commit('deleteFromCart', good)
-        }
-      })
-      .catch(console.log("error to delite"))
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.status == "ok") {
+            commit('deleteFromCart', good)
+          }
+        })
+        .catch(console.log("error to delite"))
     },
     resetcart({ commit }) {
-      return fetch('api/resetcart', {method: 'PUT',headers: { 'Content-Type': 'application/json' }})
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.status == "ok") {
-          commit('rescart');
-        }
-      })
-      .catch(console.log("error to reset"))
+      return fetch('api/resetcart', { method: 'PUT', headers: { 'Content-Type': 'application/json' } })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.status == "ok") {
+            commit('rescart');
+          }
+        })
+        .catch(console.log("error to reset"))
     },
-    loadAdress ({ commit }, adress) {
+    loadAdress({ commit }, adress) {
       return fetch('api/postaddress', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(adress) })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.status == "ok") {
-          commit('setAdressTrue');
-        }
-      })
-      .catch(console.log("error to get adress"))
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.status == "ok") {
+            commit('setAdressTrue');
+          }
+        })
+        .catch(console.log("error to get adress"))
     }
   },
 })
