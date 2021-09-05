@@ -167,15 +167,5 @@ export default createStore({
       })
       .catch(console.log("error to get adress"))
     }
-/*     resetcart({ commit }) {
-      return fetch('api/resetcart')
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.status == "ok") {
-          commit('rescart');
-        }
-      })
-      .catch(console.log("error to reset"))
-    } */
   },
 })

@@ -456,7 +456,7 @@ a {
 }
 
 .nav {
-  display: none;
+  display: flex;
   flex-direction: column;
   gap: 24px;
   position: absolute;
@@ -468,12 +468,6 @@ a {
   padding: 16px 16px 32px 32px;
   box-sizing: border-box;
   box-shadow: 10px 0px 24px 10px rgba(0, 0, 0, 0.13);
-}
-.nav__active {
-  display: flex;
-}
-.nav__notactive {
-  display: none;
 }
 .nav__svg-conteiner {
   display: flex;
