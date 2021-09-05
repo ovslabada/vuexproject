@@ -26,6 +26,9 @@ export default createStore({
     },
     goodCountInCart(state) {
       return state.cart.reduce((acc, item) => acc + item.in_cart, 0)
+    },
+    gettotalsum(state) {
+      return state.cart.reduce((acc, item) => acc + (item.in_cart * item.product_price), 0)
     }
   },
   mutations: {
@@ -64,6 +67,16 @@ export default createStore({
       let index;
       index = state.cart.findIndex((item) => item.product_id == good.product_id);
       state.cart.splice([index], 1);
+    },
+    rescart (state) {
+      let index;
+      state.cart.forEach(product => {
+      index = cart.findIndex((item) => item.product_id == product.product_id);
+      const quantity = cart[index].in_cart;
+      const goodInCatalog = state.catalog.find((good) => good.product_id == product.product_id);
+      goodInCatalog.quantity += quantity;
+      });
+      state.cart = [];
     }
   },
   actions: {
@@ -114,6 +127,26 @@ export default createStore({
         }
       })
       .catch(console.log("error to delite"))
+    },
+    resetcart({ commit }) {
+      return fetch('api/resetcart', {method: 'PUT',headers: { 'Content-Type': 'application/json' }})
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status == "ok") {
+          commit('rescart');
+        }
+      })
+      .catch(console.log("error to reset"))
     }
+/*     resetcart({ commit }) {
+      return fetch('api/resetcart')
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status == "ok") {
+          commit('rescart');
+        }
+      })
+      .catch(console.log("error to reset"))
+    } */
   },
 })

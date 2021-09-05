@@ -86,6 +86,22 @@ app.put('/api/delfromcart', (req, res) => {
   res.send({"status": "ok"});
 })
 
+app.put('/api/resetcart', (req, res) => {
+  const catalog = JSON.parse(fs.readFileSync('./server/data/catalog.json', 'utf8'));
+  const cart = JSON.parse(fs.readFileSync('./server/data/cart.json', 'utf8'));
+  let index;
+  cart.forEach(product => {
+    index = cart.findIndex((item) => item.product_id == product.product_id);
+    const quantity = cart[index].in_cart;
+    const goodInCatalog = catalog.find((good) => good.product_id == product.product_id);
+    goodInCatalog.quantity += quantity;
+    cart.splice([index], 1);
+  });
+  fs.writeFileSync('./server/data/cart.json', JSON.stringify(cart, null, '\t'));
+  fs.writeFileSync('./server/data/catalog.json', JSON.stringify(catalog, null, '\t'));
+  res.send({"status": "ok"});
+})
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })

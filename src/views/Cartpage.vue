@@ -1,10 +1,11 @@
 <template>
     <section class="cart center">
     <div class="cart__products">
+    <Items v-if="(search)"/>
     <Cartitems />
         <div class="cart__acts">
-            <input type="reset" class="form__button-grey cart__button" value="Clear shopping cart">
-            <a href="catalog.html" class="form__button-grey cart__button">Continue shopping</a>
+            <div v-on:click="clearcart" class="form__button-grey cart__button">Clear shopping cart</div>
+            <a href="/" class="form__button-grey cart__button">Continue shopping</a>
         </div>
     </div>
     <div class="cart__order-conteiner">
@@ -21,18 +22,7 @@
                     <button class="form__inputs form__button-grey" type="submit" form="order">GET A QUOTE</button>
                 </form>
             </div>
-            <div class="cart__order-price">
-                <p class="cart__sub-total">
-                    SUB TOTAL<span class="cart__sub-total_price">&#36;900</span>
-                </p>
-                <p class="cart__grand-total">
-                    GRAND TOTAL <span class="cart__grand-total_price">&#36;900</span>
-                </p>
-                <div class="cart__price-line"></div>
-                <button class="button-pink">
-                    PROCEED TO CHECKOUT
-                </button>
-            </div>
+            <Total />
         </div>
 
     </div>
@@ -41,12 +31,26 @@
 
 <script>
 import Cartitems from '../components/Cartitems.vue'
+import Items from '../components/Items.vue'
+import Total from '../components/Total.vue'
 
 export default {
     name: 'Cartpage',
     components: {
-        Cartitems
+        Cartitems,
+        Items,
+        Total
     },
-}
+    computed: {
+        search() {
+        return this.$store.getters.getSearch
+        },
+    },
+    methods: {
+        clearcart() {
+             this.$store.dispatch('resetcart');
+        }
+    }
+  }
 
 </script>
