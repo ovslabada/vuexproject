@@ -5,7 +5,7 @@
     <Cartitems />
         <div class="cart__acts">
             <div v-on:click="clearcart" class="form__button-grey cart__button">Clear shopping cart</div>
-            <a href="/" class="form__button-grey cart__button">Continue shopping</a>
+            <router-link to="/" class="form__button-grey cart__button">Continue shopping</router-link>
         </div>
     </div>
     <div class="cart__order-conteiner">
@@ -20,7 +20,7 @@
                     </select>
                     <input v-model="stateadress" class="form__inputs" type="text" placeholder="State">
                     <input v-model="postcode" class="form__inputs" type="number" placeholder="Postcode / Zip">
-                    <div v-on:click="setadress" class="form__inputs form__button-grey" form="order">GET A QUOTE</div>
+                    <input type="submit" v-on:click.prevent="setadress" class="form__inputs form__button-grey" value="GET A QUOTE">
                 </form>
             </div>
             <div v-if="(sayadress)" class="cart__order-info">

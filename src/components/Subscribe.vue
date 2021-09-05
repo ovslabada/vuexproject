@@ -9,8 +9,19 @@
             <p class="subscribe__p">For our newletter and promotion</p>
             <form class="subscribe__form" name="subscribe_form_name" action="input.php">
                 <input class="subscribe__input" type="email" placeholder="Enter Your Email">
-                <input class="subscribe__submit" type="submit" value="Subscribe">
+                <input v-on:click.prevent="onSubmit" class="subscribe__submit" type="submit" value="Subscribe">
             </form>
         </div>
     </section>
 </template>
+
+<script>
+export default {
+    name: 'Subscribe',
+    methods: {
+        onSubmit (){
+            console.log("win");
+        }
+    }
+}
+</script>

@@ -12,7 +12,7 @@ const routes = [
     path: '/cart',
     name: 'Cartpage',
     component: Cartpage
-  }
+  },
   /* {
     path: '/about',
     name: 'About',
