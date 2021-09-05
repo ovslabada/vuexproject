@@ -35,71 +35,81 @@ app.put('/api/tocart', (req, res) => {
       goodInCart.in_cart++;
     } else {
       newgoodincart.in_cart = 1;
-      cart.push(newgoodincart); // Bad, wery bad
-      // cart.push({ product_id: newgoodincart.product_id, in_cart: 1 }); // Good
+      // cart.push(newgoodincart); // Bad, wery bad
+      cart.push({ product_id: newgoodincart.product_id, in_cart: 1 }); // Good
     }
     goodInCatalog.quantity--;
 
     fs.writeFileSync('./server/data/cart.json', JSON.stringify(cart, null, '\t'));
     fs.writeFileSync('./server/data/catalog.json', JSON.stringify(catalog, null, '\t'));
 
-    res.send({"status": "ok"});
+    res.send({ "status": "ok" });
   } else {
-    res.send({"status": "error"});
+    res.send({ "status": "error" });
   }
 })
 
 app.put('/api/poptocart', (req, res) => {
   const catalog = JSON.parse(fs.readFileSync('./server/data/catalog.json', 'utf8'));
-  const cart = JSON.parse(fs.readFileSync('./server/data/cart.json', 'utf8'));
+  let cart = JSON.parse(fs.readFileSync('./server/data/cart.json', 'utf8'));
 
-  const gooddel = req.body;
-  const goodInCatalog = catalog.find((good) => good.product_id == gooddel.product_id);
-  goodInCatalog.quantity++;
-  let index;
-  index = cart.findIndex((item) => item.product_id == gooddel.product_id);
-  if (cart[index].in_cart > 1) {
-    cart[index].in_cart--
-  } else {
-    cart.splice([index], 1);
-  }
+  const goodDel = req.body;
+  const goodInCatalog = catalog.findIndex((good) => good.product_id == goodDel.product_id);
+  const goodInCart = cart.findIndex((good) => good.product_id == goodDel.product_id);
+
+  if ((goodInCatalog != -1) && (goodInCart != -1) && cart[goodInCart].in_cart) {
+    catalog[goodInCatalog].quantity++;
+
+    if (cart[goodInCart].in_cart > 1)
+      cart[goodInCart].in_cart--;
+    else
+      cart.splice(goodInCart, 1);
+
     fs.writeFileSync('./server/data/cart.json', JSON.stringify(cart, null, '\t'));
     fs.writeFileSync('./server/data/catalog.json', JSON.stringify(catalog, null, '\t'));
 
-    res.send({"status": "ok"});
+    res.send({ "status": "ok" });
+  } else {
+    res.send({ "status": "error" });
+  }
 })
 
 app.put('/api/delfromcart', (req, res) => {
   const catalog = JSON.parse(fs.readFileSync('./server/data/catalog.json', 'utf8'));
-  const cart = JSON.parse(fs.readFileSync('./server/data/cart.json', 'utf8'));
-  const gooddel = req.body;
-  let index;
-  index = cart.findIndex((item) => item.product_id == gooddel.product_id);
-  const quantity = cart[index].in_cart;
-  cart.splice([index], 1);
-  const goodInCatalog = catalog.find((good) => good.product_id == gooddel.product_id);
-  goodInCatalog.quantity += quantity;
+  let cart = JSON.parse(fs.readFileSync('./server/data/cart.json', 'utf8'));
 
-  fs.writeFileSync('./server/data/cart.json', JSON.stringify(cart, null, '\t'));
-  fs.writeFileSync('./server/data/catalog.json', JSON.stringify(catalog, null, '\t'));
+  const goodDel = req.body;
+  const goodInCatalog = catalog.findIndex((good) => good.product_id == goodDel.product_id);
+  const goodInCart = cart.findIndex((good) => good.product_id == goodDel.product_id);
 
-  res.send({"status": "ok"});
+  if ((goodInCatalog != -1) && (goodInCart != -1) && cart[goodInCart].in_cart) {
+    catalog[goodInCatalog].quantity += cart[goodInCart].in_cart;
+    cart.splice(goodInCart, 1);
+
+    fs.writeFileSync('./server/data/cart.json', JSON.stringify(cart, null, '\t'));
+    fs.writeFileSync('./server/data/catalog.json', JSON.stringify(catalog, null, '\t'));
+
+    res.send({ "status": "ok" });
+  } else {
+    res.send({ "status": "error" });
+  }
 })
 
 app.put('/api/resetcart', (req, res) => {
   const catalog = JSON.parse(fs.readFileSync('./server/data/catalog.json', 'utf8'));
-  const cart = JSON.parse(fs.readFileSync('./server/data/cart.json', 'utf8'));
-  let index;
-  cart.forEach(product => {
-    index = cart.findIndex((item) => item.product_id == product.product_id);
-    const quantity = cart[index].in_cart;
-    const goodInCatalog = catalog.find((good) => good.product_id == product.product_id);
-    goodInCatalog.quantity += quantity;
-    cart.splice([index], 1);
+  let cart = JSON.parse(fs.readFileSync('./server/data/cart.json', 'utf8'));
+
+  cart.forEach(cartItem => {
+    const goodInCatalog = catalog.find((good) => good.product_id == cartItem.product_id);
+    if (goodInCatalog) goodInCatalog.quantity += cartItem.in_cart;
   });
+
+  cart = [];
+  
   fs.writeFileSync('./server/data/cart.json', JSON.stringify(cart, null, '\t'));
   fs.writeFileSync('./server/data/catalog.json', JSON.stringify(catalog, null, '\t'));
-  res.send({"status": "ok"});
+  
+  res.send({ "status": "ok" });
 })
 
 app.post('/api/postaddress', (req, res) => {
@@ -108,8 +118,8 @@ app.post('/api/postaddress', (req, res) => {
     const newaddress = req.body;
     addresses.push(newaddress);
     fs.writeFile('./server/data/addresses.json', JSON.stringify(addresses, null, '\t'), (err) => {
-      res.send({"status": "ok"});
-    });  
+      res.send({ "status": "ok" });
+    });
   })
 })
 
