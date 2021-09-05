@@ -7,7 +7,6 @@ export default createStore({
     show: false,
     search: '',
     searchisshow: false,
-    searchistrue: false
   },
   getters: {
     getCatalog(state) {
@@ -25,9 +24,6 @@ export default createStore({
     getSearchisshow(state) {
       return state.searchisshow
     },
-    getSearchis(state) {
-      return state.searchistrue
-    },
     goodCountInCart(state) {
       return state.cart.reduce((acc, item) => acc + item.in_cart, 0)
     }
@@ -41,11 +37,11 @@ export default createStore({
     setSearch(state, value) {
       state.search = value
     },
+    resetSearch(state) {
+      state.search = ''
+    },
     setSearchisshow(state) {
       state.searchisshow = !(state.searchisshow)
-    },
-    setSearchIs(state) {
-      state.searchistrue = !(state.searchistrue)
     },
     addToCart(state, good) {
       const goodincart = state.cart.find((item) => item.product_id == good.product_id);

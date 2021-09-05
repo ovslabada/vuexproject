@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <Brand />
-    <Category />
+    <Brand v-if="(!search)"/>
+    <Category v-if="(!search)"/>
     <Items />
     <Advantages />
   </div>
@@ -20,6 +20,11 @@ export default {
     Category,
     Items,
     Advantages
+  },
+  computed: {
+    search() {
+      return this.$store.getters.getSearch
+    },
   }
 }
 </script>

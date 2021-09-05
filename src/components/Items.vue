@@ -30,7 +30,7 @@ export default {
             return this.$store.getters.getSearch ? new RegExp(this.$store.getters.getSearch, 'gi') : false
         },
         catalog() {
-            if (this.tosearch) {
+            if (this.search) {
                return this.$store.getters.getCatalog.filter((good) => this.search.test(good.product_title))
             } else if (this.toshow) {
                 return this.$store.getters.getCatalog
@@ -42,9 +42,6 @@ export default {
         toshow() {
             return this.$store.getters.getShow
         },
-        tosearch() {
-            return this.$store.getters.getSearchis
-        }
     },
     methods: {
         showAll() {
