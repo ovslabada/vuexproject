@@ -102,6 +102,17 @@ app.put('/api/resetcart', (req, res) => {
   res.send({"status": "ok"});
 })
 
+app.post('/api/postaddress', (req, res) => {
+  fs.readFile('./server/data/addresses.json', 'utf8', (err, data) => {
+    const addresses = JSON.parse(data);
+    const newaddress = req.body;
+    addresses.push(newaddress);
+    fs.writeFile('./server/data/addresses.json', JSON.stringify(addresses, null, '\t'), (err) => {
+      res.send({"status": "ok"});
+    });  
+  })
+})
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })

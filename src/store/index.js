@@ -7,6 +7,9 @@ export default createStore({
     show: false,
     search: '',
     searchisshow: false,
+    adress: {},
+    sayadresstrue: false,
+    navisshow: false
   },
   getters: {
     getCatalog(state) {
@@ -29,7 +32,17 @@ export default createStore({
     },
     gettotalsum(state) {
       return state.cart.reduce((acc, item) => acc + (item.in_cart * item.product_price), 0)
+    },
+    getAdress(state) {
+      return state.adress
+    },
+    getSayAdress(state) {
+      return state.sayadresstrue
+    },
+    getnavstatus(state) {
+      return state.navisshow
     }
+
   },
   mutations: {
     setCatalog(state, payload) { state.catalog = [...state.catalog, ...payload] },
@@ -77,6 +90,12 @@ export default createStore({
       goodInCatalog.quantity += quantity;
       });
       state.cart = [];
+    },
+    setAdressTrue(state) {
+      state.sayadresstrue = !(state.sayadresstrue)
+    },
+    setNavShow(state) {
+      state.navisshow = !(state.navisshow)
     }
   },
   actions: {
@@ -137,6 +156,16 @@ export default createStore({
         }
       })
       .catch(console.log("error to reset"))
+    },
+    loadAdress ({ commit }, adress) {
+      return fetch('api/postaddress', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(adress) })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status == "ok") {
+          commit('setAdressTrue');
+        }
+      })
+      .catch(console.log("error to get adress"))
     }
 /*     resetcart({ commit }) {
       return fetch('api/resetcart')

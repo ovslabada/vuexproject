@@ -10,17 +10,23 @@
     </div>
     <div class="cart__order-conteiner">
         <h4 class="cart__adress">SHIPPING ADRESS</h4>
+        <p v-if="(sayadress)" class="cart__adress">WE GET YOUR ADRESS AND SAY THE PRICE LATER</p>
         <div class="cart__order-conteiner-mini">
-            <div class="cart__order-info">
+            <div v-if="((!sayadress))" class="cart__order-info">
                 <form class="form" id="order" action="">
-                    <select class="form__inputs form__inputs_select" placeholder="Bangladesh">
+                    <select v-model="country" class="form__inputs form__inputs_select" placeholder="Bangladesh">
                         <option>Bangladesh</option>
                         <option>Russia</option>
                     </select>
-                    <input class="form__inputs" type="text" placeholder="State">
-                    <input class="form__inputs" type="number" placeholder="Postcode / Zip">
-                    <button class="form__inputs form__button-grey" type="submit" form="order">GET A QUOTE</button>
+                    <input v-model="stateadress" class="form__inputs" type="text" placeholder="State">
+                    <input v-model="postcode" class="form__inputs" type="number" placeholder="Postcode / Zip">
+                    <div v-on:click="setadress" class="form__inputs form__button-grey" form="order">GET A QUOTE</div>
                 </form>
+            </div>
+            <div v-if="(sayadress)" class="cart__order-info">
+                <div class="form">
+                    <div v-on:click="resetadress" class="form__inputs form__button-grey" form="order">ANOTHER ADRESS</div>
+                </div>
             </div>
             <Total />
         </div>
@@ -45,10 +51,22 @@ export default {
         search() {
         return this.$store.getters.getSearch
         },
+        adress () {
+            return this.$store.getters.getAdress
+        },
+        sayadress () {
+            return this.$store.getters.getSayAdress
+        }
     },
     methods: {
         clearcart() {
-             this.$store.dispatch('resetcart');
+            this.$store.dispatch('resetcart');
+        },
+        setadress() {
+            this.$store.dispatch('loadAdress', {country: this.country, stateadress: this.stateadress, postcode: this.postcode});
+        },
+        resetadress() {
+            this.$store.commit(setAdressTrue);
         }
     }
   }
