@@ -35,8 +35,7 @@ app.put('/api/tocart', (req, res) => {
       goodInCart.in_cart++;
     } else {
       newgoodincart.in_cart = 1;
-      // cart.push(newgoodincart); // Bad, wery bad
-      cart.push({ product_id: newgoodincart.product_id, in_cart: 1 }); // Good
+      cart.push({ product_id: newgoodincart.product_id, product_price: newgoodincart.product_price, in_cart: 1 });
     }
     goodInCatalog.quantity--;
 
