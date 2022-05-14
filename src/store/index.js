@@ -8,8 +8,7 @@ export default createStore({
     search: '',
     searchisshow: false,
     adress: {},
-    sayadresstrue: false,
-    navisshow: false
+    sayadresstrue: false
   },
   getters: {
     getCatalog(state) {
@@ -38,9 +37,6 @@ export default createStore({
     },
     getSayAdress(state) {
       return state.sayadresstrue
-    },
-    getnavstatus(state) {
-      return state.navisshow
     }
 
   },
@@ -90,9 +86,6 @@ export default createStore({
     },
     setAdressTrue(state) {
       state.sayadresstrue = !(state.sayadresstrue)
-    },
-    setNavShow(state) {
-      state.navisshow = !(state.navisshow)
     }
   },
   actions: {
