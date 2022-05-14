@@ -1,19 +1,11 @@
-# test-pro
+# vuexproject
 
-## Project setup
+## Build services
 ```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
+docker-compose build
 ```
 
-### Compiles and minifies for production
+## Run services
 ```
-npm run build
+docker-compose up -d
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
