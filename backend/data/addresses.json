@@ -1,0 +1,117 @@
+[
+	{
+		"adress": {
+			"country": "Russia",
+			"stateadress": "рр",
+			"postcode": 33,
+			"cart": [
+				{
+					"product_id": 2,
+					"product_price": "52.00",
+					"in_cart": 1
+				}
+			]
+		},
+		"cart": [
+			{
+				"product_id": 2,
+				"product_price": "52.00",
+				"in_cart": 1
+			}
+		]
+	},
+	{
+		"adress": {
+			"country": "Russia",
+			"stateadress": "ккк",
+			"postcode": 666,
+			"cart": [
+				{
+					"product_id": 2,
+					"product_price": "52.00",
+					"in_cart": 1
+				}
+			]
+		},
+		"cart": [
+			{
+				"product_id": 2,
+				"product_price": "52.00",
+				"in_cart": 1
+			}
+		]
+	},
+	{
+		"adress": {},
+		"cart": [
+			{
+				"product_id": 2,
+				"product_price": "52.00",
+				"in_cart": 1
+			}
+		]
+	},
+	{
+		"adress": {
+			"country": "Russia",
+			"stateadress": "ooo",
+			"postcode": 999,
+			"cart": [
+				{
+					"product_id": 6,
+					"product_price": "56.00",
+					"in_cart": 1
+				}
+			]
+		},
+		"cart": [
+			{
+				"product_id": 6,
+				"product_price": "56.00",
+				"in_cart": 1
+			}
+		]
+	},
+	{
+		"adress": {
+			"country": "Russia",
+			"stateadress": "ii",
+			"postcode": 66,
+			"cart": [
+				{
+					"product_id": 3,
+					"product_price": "53.00",
+					"in_cart": 1
+				}
+			]
+		},
+		"cart": [
+			{
+				"product_id": 3,
+				"product_price": "53.00",
+				"in_cart": 1
+			}
+		]
+	},
+	{
+		"adress": {
+			"country": "Russia",
+			"stateadress": "tt",
+			"postcode": 11,
+			"cart": [
+				{
+					"product_id": 3,
+					"product_price": "53.00",
+					"in_cart": 1
+				}
+			]
+		},
+		"cart": [
+			{
+				"product_id": 3,
+				"product_price": "53.00",
+				"in_cart": 1
+			}
+		]
+	}
+]

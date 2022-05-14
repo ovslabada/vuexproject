@@ -1,0 +1,460 @@
+@charset "UTF-8"
+@import "_vars"
+
+
+* 
+  margin: 0
+  padding: 0
+  font-family: Lato
+
+
+a 
+    text-decoration: none
+
+
+.svg-select:hover
+    cursor: pointer
+
+.svg-select:hover .svg-path
+    fill: $color_select
+
+
+.center 
+    padding-left: calc(50% - 570px)
+    padding-right: calc(50% - 570px)
+
+    
+.top-menu 
+    background-color: $color_bg
+    position: relative
+
+    &__conteiner
+        display: flex
+        height: 75px
+        display: flex
+        justify-content: space-between
+
+    &__leftright 
+        display: flex
+        gap: $gap
+
+    &__img-cont
+        display: flex
+        flex-direction: column
+        justify-content: center
+
+    &__forcart
+        position: relative
+
+    &__cart
+        position: absolute
+        right: 0
+        top: 16px
+        margin-right: -10px
+        color: white
+        background-color: $color_select
+        border-radius: 100%
+        font-weight: 400
+        font-size: 12px
+        line-height: 20px
+        height: 20px
+        display: flex
+        padding-left: 7px
+        padding-right: 7px
+
+    &__img
+        height: fit-content
+
+    &__form-cont
+        display: flex
+        flex-direction: column
+        justify-content: center
+
+    
+.brand
+    background-color: $color_bg-light
+    height: 764px
+    background-image: url("../img/main_img.png")
+    background-repeat: no-repeat
+    background-position-x: calc(50% - 400px)
+
+    &__name-conteiner
+        display: flex
+        margin-right: 100px
+        padding-top: 290px
+        justify-content: flex-end
+
+    &__name
+        border-left: 12px solid $color_select
+        padding-left: 16px
+
+    &__h1
+        text-transform: uppercase
+        font-weight: 900
+        font-size: 48px
+        line-height: 58px
+        color: $color_bg
+
+    &__h2
+        text-transform: uppercase
+        font-weight: bold
+        font-size: 32px
+        line-height: 38px
+        color: $color_bg
+
+        &_select
+            color: $color_select
+
+.category
+    padding-top: 64px
+    padding-bottom: 96px
+
+    &__all
+        display: flex
+        gap: $gap
+        justify-content: space-between
+
+    &__a
+        display: block
+        flex-grow: 1
+        flex-wrap: wrap
+        width: 100%
+
+    &__little
+        display: flex
+        flex-direction: column
+        height: 260px
+        background-repeat: no-repeat
+        background-size: cover
+        background-position: center
+        flex-grow: 1
+        flex-wrap: wrap
+
+        &_women
+            background-image: url("../img/for-women.jpg")
+
+        &_men
+            background-image: url("../img/for-men.jpg")
+
+        &_kids
+            background-image: url("../img/for-kids.jpg")
+
+    &__big
+        background-repeat: no-repeat
+        background-size: cover
+        background-image: url("../img/accsesories.jpg")
+        height: 180px
+        width: 100%
+        margin-top: $gap
+
+    &__info
+        padding-top: 105px
+        font-size: 16px
+        line-height: 19px
+        font-weight: 400
+        color: white
+        text-align: center
+        text-transform: uppercase
+
+        &_accesories
+            padding-top: 65px
+
+    &__h2
+        font-style: normal
+        font-weight: 700
+        font-weight: bold
+        font-size: 24px
+        line-height: 29px
+        text-align: center
+        color: $color_select
+        text-transform: uppercase
+
+.items
+    margin-bottom: 94px
+
+    &__h2
+        font-size: 30px
+        line-height: 36px
+        font-weight: 400
+        color: $color_bg
+        text-align: center
+        
+    &__p
+        font-size: 14px
+        line-height: 17px
+        font-weight: 400
+        color: $color_text
+        text-align: center
+        margin-bottom: 48px
+
+    &__container
+        display: flex
+        flex-wrap: wrap
+        gap: 30px
+        justify-content: flex-start
+
+    &__a
+        display: block
+        flex-wrap: wrap
+        width: calc( #{$width} / 3 - 20px )
+        transition: transform 0.5s
+
+        &:hover
+            transform: scale(1.01)
+
+    &__item
+        display: flex
+        flex-direction: column
+        flex-wrap: wrap
+        position: relative
+
+    &__img
+        width: 360px
+        display: block
+
+    &__img-container:hover .items__img
+        filter: brightness(0.5)
+
+    &__text
+        background: $color_bg-grey
+        padding: 24px 16px 20px
+
+    &__h3
+        font-size: 13px
+        line-height: 16px
+        color: #000000
+        font-weight: 400
+        text-transform: uppercase
+        margin-bottom: 12px
+
+    &__description
+        font-weight: 300
+        font-size: 14px
+        line-height: 17px
+        color: $color_text-dark
+        margin-bottom: 18px
+
+    &__price
+        font-weight: normal
+        font-size: 16px
+        line-height: 19px
+        font-weight: 400
+        color: $color_select
+
+    &__cart-link
+        position: absolute
+        border: 1px solid #FFFFFF
+        padding: 12px 14px
+        top: 188px
+        left: 110px
+        display: flex
+        z-index: 1
+
+        &:hover .svg-path
+            fill: $color_select
+
+        &:hover .items__add-to-cart
+            color: $color_select
+            font-weight: 700
+        
+        &:hover
+            border: 2px solid $color_select
+            cursor: pointer
+            
+    &__add-to-cart
+        font-size: 14px
+        line-height: 17px
+        font-weight: 400
+        color: #FFFFFF
+        display: flex
+        flex-direction: column
+        justify-content: center
+        margin-left: 10px
+
+.button-a
+    color: $color_select
+    margin: 48px auto 0
+    display: inline-block
+    border: 1px solid $color_select
+    padding: 14px 40px
+
+    &__container
+        display: flex
+        justify-content: space-between
+        flex-direction: column
+
+    &:hover
+        background-color: $color_select
+        color: #FFFFFF
+        cursor: pointer
+
+.advantages
+    background: $color_bg
+    padding-top: 104px
+    padding-bottom: 104px
+    padding-left: calc(50% - 568px)
+    padding-right: calc(50% - 568px)
+    display: flex
+    flex-wrap: wrap
+    justify-content: space-between
+    gap: $gap
+
+    &__each
+        display: flex
+        justify-content: center
+        flex-direction: column
+        justify-content: space-around
+        justify-self: center
+        flex-grow: 1
+        flex-basis: 300px
+
+    &__images
+        display: flex
+        width: fit-content
+        margin: auto auto 24px
+
+    &__h3
+        font-size: 20px
+        line-height: 24px
+        font-weight: 400
+        color: $color_bg-grey
+        text-align: center
+        margin-bottom: 16px
+
+    &__p
+        font-weight: 300
+        font-size: 14px
+        line-height: 17px
+        color: $color_bg-grey
+        text-align: center
+
+.subscribe
+    background-image: url("../img/footer-background.jpg")
+    background-repeat: no-repeat
+    background-size: cover
+    background-position: center
+    padding-top: 98px
+    padding-bottom: 126px
+    padding-left: calc(50% - 568px)
+    padding-right: calc(50% - 568px)
+    display: flex
+    flex-wrap: wrap
+    justify-content: space-between
+
+    &__blocks
+        display: flex
+        justify-content: center
+        flex-direction: column
+        justify-content: space-around
+        justify-self: center
+        flex-grow: 1
+        flex-basis: 300px
+        max-width: 360px
+
+    &__quote
+        font-weight: 400
+        font-size: 20px
+        line-height: 24px
+        text-align: center
+        color: $color_bg
+
+        &_i
+            font-style: italic
+
+    &__h2
+        font-weight: 700
+        font-size: 24px
+        line-height: 40px
+        text-align: center
+        color: $color_bg
+        text-transform: uppercase
+
+    &__p
+        font-weight: 400
+        font-size: 18px
+        line-height: 30px
+        text-align: center
+        color: $color_bg
+        text-transform: uppercase
+
+    &__form
+        display: flex
+        align-self: center
+        width: 100%
+        height: 50px
+
+    &__input
+        display: flex
+        width: 100%
+        border: 0px
+        border-radius: 20px 0 0 20px
+        background: $color_bg-grey
+        padding-left: 22px
+        padding-right: 22px
+        font-size: 14px
+        line-height: 17px
+        color: $color_bg
+        opacity: 0.99
+
+        &:active
+            outline: none
+
+        &:focus
+            outline: none
+
+    &__submit
+        display: flex
+        background: $color_select
+        border: 0
+        border-radius: 0 20px 20px 0
+        padding-left: 22px
+        padding-right: 22px
+        font-size: 14px
+        line-height: 17px
+        color: white
+
+        &:hover
+            cursor: pointer
+
+        &_div
+            display: flex
+            flex-direction: column
+            justify-content: center
+            font-size: 16px
+            padding-bottom: 2px    
+
+.footer
+    background-color: $color_bg
+
+    &__conteiner
+        display: flex
+        justify-content: space-between
+        flex-wrap: wrap
+        padding-top: 24px
+        padding-bottom: 24px
+
+    &__blocks
+        display: flex
+
+    &__rights
+        font-size: 16px
+        line-height: 19px
+        font-weight: 400
+        color: $color_bg-grey
+        display: flex
+        flex-direction: column
+        justify-content: center
+
+    &__social-links
+        display: flex
+
+        &:not(:last-child)
+            margin-right: 4px
+
+@import "_navigation"
+@import "_catalog"
+@import "_product"
+@import "_shop_cart"
+@import "_registration"
+@import "_media1200"
+@import "_media768"

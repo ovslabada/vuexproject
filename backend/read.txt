@@ -1,0 +1,14 @@
+package.json
+
+  "devDependencies": {
+    "nodemon": "^2.0.15" 
+  },
+
+  пакет для автоперезапуска сервера бэк
+
+
+
+"scripts": {
+    "product": "node server.js",
+    "dev": "npx nodemon server.js" // команда
+  },

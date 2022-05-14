@@ -1,0 +1,305 @@
+.nav
+    display: flex
+    flex-direction: column
+    gap: 24px
+    position: absolute
+    z-index: 2
+    background-color: white
+    top: 75px
+    right: 0
+    width: 232px
+    padding: 16px 16px 32px 32px
+    box-sizing: border-box
+    box-shadow: 10px 0px 24px 10px rgba(0, 0, 0, 0.13)
+
+    &__svg-conteiner
+        display: flex
+        justify-content: flex-end
+  
+    &__svg
+        margin-right: 0
+        transition: transform 0.5s
+
+        &:hover
+            transform: rotate(180deg)
+            cursor: pointer
+
+    &__heading
+        font-size: 14px
+        line-height: 17px
+        color: #000000
+        text-transform: uppercase
+        margin-top: -24px
+
+    &__summary
+        list-style: none
+
+    &__heading3
+        font-size: 14px
+        line-height: 17px
+        color: $color_select
+        font-weight: 400
+        text-transform: uppercase
+
+    &__ol
+        list-style: none
+        margin: 24px 0 0px 16px
+        display: flex
+        flex-direction: column
+        gap: 10px
+
+    &__li
+        font-weight: 400
+        font-size: 14px
+        line-height: 17px
+
+    &__a-heading
+        color: $color_select
+
+    &__a
+        color: $color_text-dark
+        opacity: 0.9
+
+        &:hover
+            color: $color_select
+
+    &__invisible
+        display: none
+            
+.navigation
+    background-color: $color_bg-pink
+    padding-top: 60px
+    padding-bottom: 60px
+
+    &__container
+        display: flex
+        justify-content: space-between
+        flex-wrap: wrap
+
+    &__page-name
+        display: flex
+        font-weight: 400
+        font-size: 24px
+        line-height: 29px
+        color: $color_select
+        text-transform: uppercase
+
+    &__crumbs-container
+        display: flex
+        flex-direction: column
+        justify-content: center
+
+    &__bread-crumbs
+        display: flex
+        list-style: none
+
+        &:last-of-type
+            color: $color_select
+
+    &__li-crumb
+        font-weight: 300
+        font-size: 14px
+        line-height: 17px
+        text-transform: uppercase
+
+        &:not(:last-of-type)::after
+            content: "  /"
+            color: $color_text-dark
+            opacity: 0.9
+            margin-right: 4px
+
+        &:last-of-type a
+            color: $color_select
+
+    &__link
+        color: $color_text-dark
+        opacity: 0.9
+
+        &:hover
+            color: $color_select
+
+.choise-nav
+    margin-top: 50px
+    margin-bottom: 64px
+
+    &__container
+        display: flex
+        flex-wrap: wrap
+        font-size: 14px
+        line-height: 17px
+
+    &__left
+        display: flex
+        width: calc( ( 100% + #{$gap}) / 3 )
+        position: relative
+
+    &__filter-container
+        display: flex
+
+        &:hover
+            cursor: pointer
+
+        &:hover .choise-nav__filter
+            color: $color_select
+
+        &:hover .svg-path
+            fill: $color_select   
+
+    &__filter
+        font-weight: 600
+        color: #000
+        margin-right: 10px 
+        text-transform: uppercase
+
+    &__right
+        display: flex
+
+    &__details
+        margin-right: 28px
+
+    &__summary
+        list-style: none
+        font-weight: 400
+        color: $color_text-dark
+        display: flex
+        cursor: pointer
+
+        &:hover
+            color: $color_select
+
+        &:hover .svg-path
+            fill: $color_select    
+
+    &__element
+        margin-right: 10px
+        text-transform: uppercase
+
+    &__svg
+        display: flex
+        padding-top: 3px
+
+    &__choice
+        background: #FFFFFF
+        box-shadow: 6px 4px 35px rgba(0, 0, 0, 0.21)
+        padding: 10px 30px 10px 10px
+        margin-top: 5px
+        margin-left: -10px
+        position: absolute
+        z-index: 2
+
+    &__form
+        display: flex
+        flex-direction: column
+        gap: 6px
+
+    &__checkbox
+        margin-right: 10px
+
+    &__text
+        text-transform: uppercase
+        color: $color_text-dark
+
+.form
+    display: flex
+    flex-direction: column
+    gap: 20px
+
+    &__inputs
+        display: inline-flex
+        width: 360px
+        height: 45px
+        padding-left: 18px
+        padding-right: 18px
+        box-sizing: border-box
+        font-size: 13px
+        line-height: 16px
+        color: $border_darkcolor
+        border: 1px solid $border_darkcolor
+
+        &_select
+            color: B1B1B1
+            appearance: none
+
+        &:focus
+            outline: 0
+            outline-offset: 0
+            border: 1px solid $border_darkcolor
+
+        &:active
+            outline: 0
+            outline-offset: 0
+            border: 1px solid $border_darkcolor
+
+    &__button-grey
+        padding: 10px 16px
+        width: fit-content
+        height: fit-content
+        box-sizing: border-box
+        font-size: 11px
+        line-height: 13px
+        color: $border_darkcolor
+        text-align: center
+        text-transform: uppercase
+        background-color: white
+        border: 1px solid $border_darkcolor
+        cursor: pointer
+
+    &__name
+        font-weight: 300
+        font-size: 16px
+        line-height: 19px
+        color: $color_bg
+
+    &__description
+        font-weight: 300
+        font-size: 13px
+        line-height: 16px
+        color: $color_text
+
+    &__radio
+        display: inline
+        font-weight: 300
+        font-size: 11px
+        line-height: 13px
+        color: #000000
+        margin-top: 10px
+        margin-bottom: 10px
+
+    &__radio-name
+        padding-left: 10px
+        padding-right: 20px
+        
+.button-pink
+    box-sizing: border-box
+    padding: 16px 40px
+    border: 0
+    background: $color_select
+    font-weight: 400
+    font-size: 16px
+    line-height: 19px
+    color: #FFFFFF
+    text-transform: uppercase
+    transition: transform .5s
+    cursor: pointer
+    width: fit-content
+
+    &:focus
+        border: 0
+        outline: none
+
+    &:active
+        border: 0
+        outline: none
+
+    &:hover
+        transform: scale(1.02)
+
+    &__content
+        display: flex
+        gap: 20px
+
+    &__svg-container
+        display: flex
+        flex-direction: column
+        justify-content: center
+
