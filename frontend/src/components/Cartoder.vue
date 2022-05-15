@@ -46,7 +46,7 @@ export default {
     },
     methods: {
         addadress() {
-            this.$store.commit('addadress', {country: this.country, stateadress: this.stateadress, postcode: this.postcode, cart: this.cart})
+            this.$store.commit('addadress', {country: this.country, stateadress: this.stateadress, postcode: this.postcode})
         },
         deleteadress() {
             this.$store.commit('setadresswrited');

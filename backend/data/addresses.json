@@ -1,30 +1,30 @@
 [
 	{
 		"adress": {
-			"country": "Russia",
-			"stateadress": "рр",
-			"postcode": 33,
+			"country": "Bangladesh",
+			"stateadress": "zzz",
+			"postcode": 0,
 			"cart": [
 				{
-					"product_id": 2,
-					"product_price": "52.00",
-					"in_cart": 1
+					"product_id": 3,
+					"product_price": "53.00",
+					"in_cart": 2
 				}
 			]
 		},
 		"cart": [
 			{
-				"product_id": 2,
-				"product_price": "52.00",
-				"in_cart": 1
+				"product_id": 3,
+				"product_price": "53.00",
+				"in_cart": 2
 			}
 		]
 	},
 	{
 		"adress": {
-			"country": "Russia",
-			"stateadress": "ккк",
-			"postcode": 666,
+			"country": "Bangladesh",
+			"stateadress": "zzzzzz",
+			"postcode": 111111,
 			"cart": [
 				{
 					"product_id": 2,
@@ -45,17 +45,38 @@
 		"adress": {},
 		"cart": [
 			{
-				"product_id": 2,
-				"product_price": "52.00",
+				"product_id": 5,
+				"product_price": "55.00",
 				"in_cart": 1
 			}
 		]
 	},
 	{
 		"adress": {
-			"country": "Russia",
-			"stateadress": "ooo",
-			"postcode": 999,
+			"country": "Bangladesh",
+			"stateadress": "pppppp",
+			"postcode": 111111,
+			"cart": [
+				{
+					"product_id": 4,
+					"product_price": "54.00",
+					"in_cart": 1
+				}
+			]
+		},
+		"cart": [
+			{
+				"product_id": 4,
+				"product_price": "54.00",
+				"in_cart": 1
+			}
+		]
+	},
+	{
+		"adress": {
+			"country": "Bangladesh",
+			"stateadress": "777777",
+			"postcode": 555555,
 			"cart": [
 				{
 					"product_id": 6,
@@ -75,20 +96,19 @@
 	{
 		"adress": {
 			"country": "Russia",
-			"stateadress": "ii",
-			"postcode": 66,
-			"cart": [
-				{
-					"product_id": 3,
-					"product_price": "53.00",
-					"in_cart": 1
-				}
-			]
+			"stateadress": "oooooo",
+			"postcode": 121212
 		},
 		"cart": [
 			{
 				"product_id": 3,
+				"product_title": "Sweatshirt",
+				"product_description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo laborum blanditiis officia nam voluptate quos minus",
 				"product_price": "53.00",
+				"product_images": "img/catalog/item_3.jpg",
+				"product_link": "product.html",
+				"quantity": 8,
+				"on_main": true,
 				"in_cart": 1
 			}
 		]
@@ -96,21 +116,31 @@
 	{
 		"adress": {
 			"country": "Russia",
-			"stateadress": "tt",
-			"postcode": 11,
-			"cart": [
-				{
-					"product_id": 3,
-					"product_price": "53.00",
-					"in_cart": 1
-				}
-			]
+			"stateadress": "jjjjjj",
+			"postcode": 9999999
 		},
 		"cart": [
 			{
-				"product_id": 3,
-				"product_price": "53.00",
+				"product_id": 6,
+				"product_title": "Blazer small",
+				"product_description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore esse libero incidunt corrupti doloremque cumque tempora, quisquam in ullam non ab.",
+				"product_price": "56.00",
+				"product_images": "img/catalog/item_6.jpg",
+				"product_link": "product.html",
+				"quantity": 18,
+				"on_main": true,
 				"in_cart": 1
+			},
+			{
+				"product_id": 5,
+				"product_title": "Blazer",
+				"product_description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex mollitia sequi sit! Possimus dignissimos veritatis architecto temporibus.",
+				"product_price": "55.00",
+				"product_images": "img/catalog/item_5.jpg",
+				"product_link": "product.html`",
+				"quantity": 29,
+				"on_main": true,
+				"in_cart": 3
 			}
 		]
 	}

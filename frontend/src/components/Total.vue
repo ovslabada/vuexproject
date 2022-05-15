@@ -8,12 +8,12 @@
             GRAND TOTAL <span class="cart__grand-total_price">&#36;{{ totalsum }}</span>
         </p>
         <div class="cart__price-line"></div>
-        <button v-if="(!isadresssent & adress)" class="button-pink" v-on:click.prevent="setadress">
+        <button v-if="(!isadresssent)" class="button-pink" v-on:click.prevent="setadress">
             PROCEED TO CHECKOUT
         </button>
-        <div v-if="isadresssent" v-on:click="setadressnotsent" class="button-pink">
+        <router-link to="/" v-if="isadresssent" v-on:click="setadressnotsent" class="button-pink">
             LOOK FOR NEW GOODS
-        </div>
+        </router-link>
     </div>
 </template>
 
@@ -29,6 +29,11 @@ export default {
         adress () {
             return this.$store.getters.getAdress
         },
+        isadress () {
+            for (let key in this.adress) {
+                return true
+            } return false
+        },
         cart() {
             return this.$store.getters.getCart
         },
@@ -41,13 +46,17 @@ export default {
     },
     methods: {
         setadress() {
-            if (setadresswrited) {
+            if (this.isadresswrited) {
                 this.$store.commit('setadresswrited')
             }
-            this.$store.dispatch('loadAdress', {adress: this.adress, cart: this.cart});
+            if (this.isadress) {
+                this.$store.dispatch('loadAdress', {adress: this.adress, cart: this.cart});
+            }
         },
         setadressnotsent () {
-            this.$store.commit('setadresssent')
+            if (this.isadresssent) {
+                this.$store.commit('setadresssent')
+            }
         }
     }
     }
